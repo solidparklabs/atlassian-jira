@@ -6,12 +6,11 @@ stages:
       shellScript: printenv
 - name: Publish Image
   steps:
-    - publishImageConfig:
-        dockerfilePath: ./Dockerfile
-        buildContext: .
-        tag: rdcap-jira:${CICD_EXECUTION_SEQUENCE}
-        #pushRemote: true
-        registry: docker-registry.docker-registry.10.19.199.2.xip.io
+  - publishImageConfig:
+      dockerfilePath: ./Dockerfile
+      buildContext: .
+      tag: rdcap-jira:${CICD_EXECUTION_SEQUENCE}
+      registry: docker-registry.docker-registry.10.19.199.2.xip.io
 - name: Render and Publish Helm Charts
   steps:
   - runScriptConfig:
@@ -21,15 +20,24 @@ stages:
       CHART_NAME: rdcap-atlassian-jira-software
       CHART_VERSION: ${CICD_EXECUTION_SEQUENCE}
       HELM_REPO_URL: http://chartmuseum-chartmuseum.chartmuseum.10.19.199.2.xip.io/
-#    envFrom:
-#    - sourceName: chart-creds
-#      sourceKey: BASIC_AUTH_PASS
-#      targetKey: HELM_REPO_PASSWORD
-#    - sourceName: chart-creds
-#      sourceKey: BASIC_AUTH_USER
-#      targetKey: HELM_REPO_USERNAME
 - name: Deploy
   steps:
   - applyYamlConfig:
       path: ./deployment.yaml
+  - publishCatalogConfig:
+      path: myFolder
+      catalogTemplate: myApp
+      version: myVersion
+      gitUrl: https://github.com/solidparklabs/charts.git
+      gitBranch: master
+      gitAuthor: Admin
+      gitEmail: admin@solidparklab.se
+    envFrom:
+    - sourceName: github-solidparklab
+      sourceKey: USERNAME
+      targetKey: USERNAME
+    - sourceName: github-solidparklab
+      sourceKey: PASSWORD
+      targetKey: PASSWORD
 timeout: 60
+notification: {}
