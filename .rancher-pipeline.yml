@@ -3,7 +3,7 @@ stages:
   steps:
   - runScriptConfig:
       image: java:8
-      shellScript: echo aa
+      shellScript: printenv
 - name: Publish Image
   steps:
     - publishImageConfig:
