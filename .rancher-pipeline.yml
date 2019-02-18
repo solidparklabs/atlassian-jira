@@ -18,7 +18,7 @@ stages:
 - name: Publish Helm
   steps:
   - publishCatalogConfig:
-      path: myFolder
+      path: charts
       catalogTemplate: myApp
       version: myVersion
       gitUrl: https://github.com/solidparklabs/charts.git
