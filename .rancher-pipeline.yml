@@ -21,7 +21,7 @@ stages:
       path: .chart
       catalogTemplate: atlassian-jira
       version: v0.0.1
-      gitUrl: https://github.com/solidparklabs/charts
+      gitUrl: https://github.com/solidparklabs/charts.git
       gitBranch: master
       gitAuthor: Admin
       gitEmail: admin@solidparklab.se
