@@ -25,12 +25,9 @@ stages:
       gitBranch: master
       gitAuthor: Admin
       gitEmail: admin@solidparklab.se
-#    envFrom:
-#    - sourceName: github-solidparklab
-#      sourceKey: USERNAME
-#      targetKey: USERNAME
-#    - sourceName: github-solidparklab
-#      sourceKey: PASSWORD
-#      targetKey: PASSWORD
+    envFrom:
+    - sourceName: githubchartrepo
+      sourceKey: DEPLOY_KEY
+      targetKey: DEPLOY_KEY
 timeout: 60
 notification: {}
