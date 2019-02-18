@@ -18,7 +18,7 @@ stages:
 - name: Publish Helm
   steps:
   - publishCatalogConfig:
-      path: charts
+      path: .chart
       catalogTemplate: atlassian-jira
       version: v0.0.1
       gitUrl: https://github.com/solidparklabs/charts
