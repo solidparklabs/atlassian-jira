@@ -19,8 +19,8 @@ stages:
   steps:
   - publishCatalogConfig:
       path: charts
-      catalogTemplate: myApp
-      version: myVersion
+      catalogTemplate: atlassian-jira
+      version: v0.0.1
       gitUrl: https://github.com/solidparklabs/charts.git
       gitBranch: master
       gitAuthor: Admin
