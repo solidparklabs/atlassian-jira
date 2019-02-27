@@ -26,7 +26,7 @@ stages:
       image: jgreat/rancher-pipeline-publish-chart:0.0.2
       shellScript: publish-chart.sh
     env:
-      HELM_REPO_URL: http://10.19.199.13:30003/chartrepo/rdcap-dev/
+      HELM_REPO_URL: https://10.19.199.13:30003/chartrepo/rdcap-dev/
       CHART_NAME: rdcap-atlassian-jira
       CHART_VERSION: v0.0.1
       HELM_REPO_INSECURE: "true"
