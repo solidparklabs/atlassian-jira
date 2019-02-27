@@ -12,6 +12,9 @@ stages:
       tag: rdcap-jira:${CICD_EXECUTION_SEQUENCE}
       pushRemote: true
       registry: 10.19.199.13:30003/rdcap-dev
+    env:
+      PLUGIN_DEBUG: "true"
+      PLUGIN_INSECURE: "true"
 - name: Deploy
   steps:
   - applyYamlConfig:
