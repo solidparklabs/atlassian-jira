@@ -26,7 +26,7 @@ stages:
       path: .chart
       catalogTemplate: atlassian-jira
       version: v0.0.1
-      gitUrl: git@github.com:solidparklabs/charts.git
+      gitUrl: https://10.19.199.13:30003/chartrepo/rdcap-dev
       gitBranch: master
       gitAuthor: Admin
       gitEmail: admin@solidparklab.se
