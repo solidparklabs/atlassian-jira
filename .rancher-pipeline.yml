@@ -27,6 +27,8 @@ stages:
       shellScript: publish-chart.sh
     env:
       HELM_REPO_URL: https://10.19.199.13:30003/chartrepo/rdcap-dev/
+      CHART_NAME: rdcap-atlassian-jira
+      CHART_VERSION: 0.0.${CICD_EXECUTION_SEQUENCE}
     envFrom:
     - sourceName: chart-creds
       sourceKey: BASIC_AUTH_PASS
