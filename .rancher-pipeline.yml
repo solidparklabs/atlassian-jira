@@ -13,8 +13,9 @@ stages:
       pushRemote: true
       registry: 10.19.199.13:30003
     env:
-      PLUGIN_DEBUG: "true"
-    #  PLUGIN_INSECURE: "true"
+    #  PLUGIN_DEBUG: "true"
+    # PLUGIN_INSECURE behövs för att komma åt docker registry med self signed cert. 
+      PLUGIN_INSECURE: "true"
 - name: Deploy
   steps:
   - applyYamlConfig:
