@@ -22,17 +22,17 @@ stages:
 #      path: ./deployment.yaml
 - name: Publish Helm
   steps:
-  - publishCatalogConfig:
-      path: .chart
-      catalogTemplate: atlassian-jira
-      version: v0.0.1
-      gitUrl: https://10.19.199.13:30003/chartrepo/rdcap-dev
-      gitBranch: master
-      gitAuthor: Admin
-      gitEmail: admin@solidparklab.se
+  - runScriptConfig:
+      image: jgreat/rancher-pipeline-publish-chart:0.0.2
+      shellScript: publish-chart.sh
+    env:
+      HELM_REPO_URL: https://10.19.199.13:30003/chartrepo/rdcap-dev/
     envFrom:
-    - sourceName: githubchartrepo
-      sourceKey: DEPLOY_KEY
-      targetKey: DEPLOY_KEY
+    - sourceName: chart-creds
+      sourceKey: BASIC_AUTH_PASS
+      targetKey: HELM_REPO_PASSWORD
+    - sourceName: chart-creds
+      sourceKey: BASIC_AUTH_USER
+      targetKey: HELM_REPO_USERNAME
 timeout: 60
 notification: {}
