@@ -16,23 +16,23 @@ stages:
     #  PLUGIN_DEBUG: "true"
     # PLUGIN_INSECURE behövs för att komma åt docker registry med self signed cert. 
       PLUGIN_INSECURE: "true"
-- name: Deploy
-  steps:
-  - applyYamlConfig:
-      path: ./deployment.yaml
-#- name: Publish Helm
+#- name: Deploy
 #  steps:
-#  - publishCatalogConfig:
-#      path: .chart
-#      catalogTemplate: atlassian-jira
-#      version: v0.0.1
-#      gitUrl: git@github.com:solidparklabs/charts.git
-#      gitBranch: master
-#      gitAuthor: Admin
-#      gitEmail: admin@solidparklab.se
-#    envFrom:
-#    - sourceName: githubchartrepo
-#      sourceKey: DEPLOY_KEY
-#      targetKey: DEPLOY_KEY
+#  - applyYamlConfig:
+#      path: ./deployment.yaml
+- name: Publish Helm
+  steps:
+  - publishCatalogConfig:
+      path: .chart
+      catalogTemplate: atlassian-jira
+      version: v0.0.1
+      gitUrl: git@github.com:solidparklabs/charts.git
+      gitBranch: master
+      gitAuthor: Admin
+      gitEmail: admin@solidparklab.se
+    envFrom:
+    - sourceName: githubchartrepo
+      sourceKey: DEPLOY_KEY
+      targetKey: DEPLOY_KEY
 timeout: 60
 notification: {}
