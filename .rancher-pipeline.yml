@@ -18,7 +18,7 @@ stages:
   steps:
   - runScriptConfig:
       image: java:8
-      shellScript: apt-get install ca-certificates
+      shellScript: ls /usr/share/ca-certificates
   - runScriptConfig:
       image: jgreat/rancher-pipeline-publish-chart:0.0.2
       shellScript: publish-chart.sh
