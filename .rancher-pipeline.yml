@@ -13,23 +13,17 @@ stages:
       pushRemote: true
       registry: 10.19.199.13:30003
     env:
-    #  PLUGIN_DEBUG: "true"
-    # PLUGIN_INSECURE behövs för att komma åt docker registry med self signed cert. 
       PLUGIN_INSECURE: "true"
-#- name: Deploy
-#  steps:
-#  - applyYamlConfig:
-#      path: ./deployment.yaml
 - name: Publish Helm
   steps:
   - runScriptConfig:
       image: jgreat/rancher-pipeline-publish-chart:0.0.2
       shellScript: publish-chart.sh
     env:
-      HELM_REPO_URL: https://10.19.199.13:30003/chartrepo/rdcap-dev/
       CHART_NAME: rdcap-atlassian-jira
       CHART_VERSION: v0.0.1
       HELM_REPO_INSECURE: "true"
+      HELM_REPO_URL: https://10.19.199.13:30003/chartrepo/rdcap-dev/
     envFrom:
     - sourceName: chart-creds
       sourceKey: BASIC_AUTH_PASS
@@ -37,5 +31,8 @@ stages:
     - sourceName: chart-creds
       sourceKey: BASIC_AUTH_USER
       targetKey: HELM_REPO_USERNAME
+  - runScriptConfig:
+      image: java:8
+      shellScript: printenv
 timeout: 60
 notification: {}
