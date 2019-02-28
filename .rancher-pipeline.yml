@@ -17,6 +17,9 @@ stages:
 - name: Publish Helm
   steps:
   - runScriptConfig:
+      image: java:8
+      shellScript: printenv
+  - runScriptConfig:
       image: jgreat/rancher-pipeline-publish-chart:0.0.2
       shellScript: publish-chart.sh
     env:
@@ -31,8 +34,5 @@ stages:
     - sourceName: chart-creds
       sourceKey: BASIC_AUTH_USER
       targetKey: HELM_REPO_USERNAME
-  - runScriptConfig:
-      image: java:8
-      shellScript: printenv
 timeout: 60
 notification: {}
