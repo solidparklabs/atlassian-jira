@@ -17,8 +17,8 @@ stages:
 - name: Publish Helm
   steps:
   - runScriptConfig:
-      image: java:8
-      shellScript: ls /usr/share/ca-certificates
+      image: busybox
+      shellScript: cp /home/core/registry-ca /etc/docker/certs.d/reg.example.com/ca.crt && exec tail -f /dev/null
   - runScriptConfig:
       image: jgreat/rancher-pipeline-publish-chart:0.0.2
       shellScript: publish-chart.sh
