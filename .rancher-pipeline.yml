@@ -18,7 +18,11 @@ stages:
   steps:
   - runScriptConfig:
       image: busybox
-      shellScript: cp /home/core/registry-ca /etc/docker/certs.d/reg.example.com/ca.crt && exec tail -f /dev/null
+      shellScript: echo $HELM_REPO_CA_FILE
+    envFrom:
+    - sourceName: chart-creds
+      sourceKey: HELM_REPO_CA_CRT
+      targetKey: HELM_REPO_CA_CRT
   - runScriptConfig:
       image: jgreat/rancher-pipeline-publish-chart:0.0.2
       shellScript: publish-chart.sh
