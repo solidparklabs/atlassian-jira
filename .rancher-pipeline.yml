@@ -19,15 +19,51 @@ stages:
   - runScriptConfig:
       image: jgreat/rancher-pipeline-publish-chart:0.0.2
       shellScript: |-
-       echo $HELM_REPO_CA_CRT >> ca.crt 
-       ls -all
-       publish-chart.sh 
-       ls -all
+        set -e
+        if [ -z "${CHART_VERSION}" ]; then
+          # Get the first semver tag
+          echo "No CHART_VERSION defined.  Using .tags file."
+          IFS=',' read -ra TAGS <<< $(cat .tags)
+          for t in "${TAGS[@]}"; do
+            echo "Found tag: ${t}"
+            if [[ $t =~ [v]*[0-9]+\.[0-9]+\.[0-9]+.* ]]; then
+              CHART_VERSION=$t
+              break
+            fi
+          done
+        fi
+        echo "CHART_VERSION: $CHART_VERSION"
+        if [ -z "${CHART_NAME}" ]; then
+          echo "No CHART_NAME defined. Using CICD_GIT_BRANCH"
+          CHART_NAME="${CICD_GIT_BRANCH}"
+        fi
+        echo "CHART_NAME: ${CHART_NAME}"
+        mkdir -p .build/charts
+        cp -R .chart .build/${CHART_NAME}
+        # sed replace version and name
+        sed -i -e "s/%VERSION%/${CHART_VERSION}/g" .build/${CHART_NAME}/Chart.yaml
+        sed -i -e "s/%CHART_NAME%/${CHART_NAME}/g" .build/${CHART_NAME}/Chart.yaml
+        export HELM_HOME=/root/.helm
+        # Lint Chart
+        helm lint .build/${CHART_NAME}
+        # Package Chart
+        helm package -d .build/charts .build/${CHART_NAME}
+        # Add Remote Repo
+        helm repo add --username "${HELM_REPO_USERNAME}" --password "${HELM_REPO_PASSWORD}" \
+        pipeline-tmp ${HELM_REPO_URL}
+        # Publish Chart 
+        echo $HELM_REPO_CA_CRT >> ca.crt
+        helm push .build/charts/${CHART_NAME}-${CHART_VERSION}.tgz pipeline-tmp --ca-file ca.crt
+#      shellScript: |-
+#       echo $HELM_REPO_CA_CRT >> ca.crt 
+#       ls -all
+#       publish-chart.sh 
+#       ls -all
     env:
       CHART_NAME: rdcap-atlassian-jira
       CHART_VERSION: v0.0.1
       HELM_REPO_INSECURE: "true"
-      HELM_REPO_URL: https://10.19.199.13:30003/chartrepo/rdcap-dev/ --ca-file ca.crt --cert-file '' --key-file  ''
+      HELM_REPO_URL: https://10.19.199.13:30003/chartrepo/rdcap-dev/ 
     envFrom:
     - sourceName: chart-creds
       sourceKey: BASIC_AUTH_PASS
