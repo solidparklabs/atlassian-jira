@@ -18,7 +18,7 @@ stages:
   steps:
   - runScriptConfig:
       image: busybox
-      shellScript: echo $HELM_REPO_CA_CRT >> ca.crt | ls -l
+      shellScript: echo $HELM_REPO_CA_CRT >> ca.crt | ls -all
     envFrom:
     - sourceName: chart-creds
       sourceKey: HELM_REPO_CA_CRT
