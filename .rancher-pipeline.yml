@@ -18,7 +18,7 @@ stages:
   steps:
   - runScriptConfig:
       image: busybox
-      shellScript: echo $HELM_REPO_CA_CRT >> ca.crt | ls -all
+      shellScript: echo $HELM_REPO_CA_CRT >> .build/ca.crt | ls -all
     envFrom:
     - sourceName: chart-creds
       sourceKey: HELM_REPO_CA_CRT
@@ -30,7 +30,7 @@ stages:
       CHART_NAME: rdcap-atlassian-jira
       CHART_VERSION: v0.0.1
       HELM_REPO_INSECURE: "true"
-      HELM_REPO_URL: https://10.19.199.13:30003/chartrepo/rdcap-dev/ --ca-file ./ca.crt
+      HELM_REPO_URL: https://10.19.199.13:30003/chartrepo/rdcap-dev/ --ca-file .build/ca.crt
     envFrom:
     - sourceName: chart-creds
       sourceKey: BASIC_AUTH_PASS
