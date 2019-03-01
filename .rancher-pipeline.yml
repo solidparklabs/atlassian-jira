@@ -21,7 +21,7 @@ stages:
       shellScript: |-
        echo $HELM_REPO_CA_CRT >> ca.crt 
        export HELM_REPO_CA_FILE='ca.crt'
-       chown 1000: ca.crt
+       chown 1000 ca.crt
        ls -all
        publish-chart.sh 
        ls -all
