@@ -18,7 +18,7 @@ stages:
   steps:
   - runScriptConfig:
       image: jgreat/rancher-pipeline-publish-chart:0.0.2
-      shellScript: 
+      shellScript: |-
        echo $HELM_REPO_CA_CRT >> ca.crt 
        publish-chart.sh 
        ls -all
