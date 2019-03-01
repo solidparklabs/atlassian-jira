@@ -18,7 +18,10 @@ stages:
   steps:
   - runScriptConfig:
       image: jgreat/rancher-pipeline-publish-chart:0.0.2
-      shellScript: echo $HELM_REPO_CA_CRT >> ca.crt | publish-chart.sh | ls -all
+      shellScript: 
+      - echo $HELM_REPO_CA_CRT >> ca.crt 
+      - publish-chart.sh 
+      - ls -all
     env:
       CHART_NAME: rdcap-atlassian-jira
       CHART_VERSION: v0.0.1
