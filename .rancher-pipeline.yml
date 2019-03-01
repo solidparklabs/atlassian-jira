@@ -4,7 +4,6 @@ stages:
   - runScriptConfig:
       image: java:8
       shellScript: export 
-                   printenv
 - name: Publish Image
   steps:
   - publishImageConfig:
