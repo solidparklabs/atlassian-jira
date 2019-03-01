@@ -25,19 +25,19 @@ stages:
           echo "No CHART_VERSION defined.  Using .tags file."
           IFS=',' read -ra TAGS <<< $(cat .tags)
           for t in "${TAGS[@]}"; do
-            echo "Found tag: ${t}"
+            #echo "Found tag: ${t}"
             if [[ $t =~ [v]*[0-9]+\.[0-9]+\.[0-9]+.* ]]; then
               CHART_VERSION=$t
               break
             fi
           done
         fi
-        echo "CHART_VERSION: $CHART_VERSION"
+        #echo "CHART_VERSION: $CHART_VERSION"
         if [ -z "${CHART_NAME}" ]; then
           echo "No CHART_NAME defined. Using CICD_GIT_BRANCH"
           CHART_NAME="${CICD_GIT_BRANCH}"
         fi
-        echo "CHART_NAME: ${CHART_NAME}"
+        #echo "CHART_NAME: ${CHART_NAME}"
         mkdir -p .build/charts
         cp -R .chart .build/${CHART_NAME}
         # sed replace version and name
