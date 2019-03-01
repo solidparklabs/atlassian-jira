@@ -17,20 +17,13 @@ stages:
 - name: Publish Helm
   steps:
   - runScriptConfig:
-      image: busybox
-      shellScript: echo $HELM_REPO_CA_CRT >> .build/ca.crt | ls .build/ -all
-    envFrom:
-    - sourceName: chart-creds
-      sourceKey: HELM_REPO_CA_CRT
-      targetKey: HELM_REPO_CA_CRT
-  - runScriptConfig:
       image: jgreat/rancher-pipeline-publish-chart:0.0.2
-      shellScript: publish-chart.sh
+      shellScript: echo $HELM_REPO_CA_CRT >> ca.crt | publish-chart.sh | ls -all
     env:
       CHART_NAME: rdcap-atlassian-jira
       CHART_VERSION: v0.0.1
       HELM_REPO_INSECURE: "true"
-      HELM_REPO_URL: https://10.19.199.13:30003/chartrepo/rdcap-dev/ --ca-file .build/ca.crt
+      HELM_REPO_URL: https://10.19.199.13:30003/chartrepo/rdcap-dev/ --ca-file ./ca.crt
     envFrom:
     - sourceName: chart-creds
       sourceKey: BASIC_AUTH_PASS
@@ -38,5 +31,8 @@ stages:
     - sourceName: chart-creds
       sourceKey: BASIC_AUTH_USER
       targetKey: HELM_REPO_USERNAME
+    - sourceName: chart-creds
+      sourceKey: HELM_REPO_CA_CRT
+      targetKey: HELM_REPO_CA_CRT
 timeout: 60
 notification: {}
