@@ -20,7 +20,7 @@ stages:
       image: jgreat/rancher-pipeline-publish-chart:0.0.2
       shellScript: |-
        echo $HELM_REPO_CA_CRT >> ca.crt 
-       export HELM_REPO_CA_FILE='ca.crt'
+       export HELM_REPO_CA_FILE=ca.crt
        chown 10000 ca.crt
        ls -all
        publish-chart.sh 
