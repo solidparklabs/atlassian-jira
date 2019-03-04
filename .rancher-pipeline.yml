@@ -17,7 +17,7 @@ stages:
 - name: Publish Helm
   steps:
   - runScriptConfig:
-      image: jgreat/rancher-pipeline-publish-chart:0.0.2
+      image: library/rdcap-rancher-pipeline-publish-chart:latest
       shellScript: |-
        echo $HELM_REPO_CA_CRT >> ca.crt 
        export HELM_REPO_CA_FILE=ca.crt
