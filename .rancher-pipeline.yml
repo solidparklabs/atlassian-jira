@@ -28,7 +28,7 @@ stages:
     env:
       CHART_NAME: rdcap-atlassian-jira
       CHART_VERSION: v0.0.1
-      HELM_REPO_INSECURE: "true"
+     # HELM_REPO_INSECURE: "true"
       HELM_REPO_URL: https://10.19.199.13:30003/chartrepo/rdcap-dev/ 
     envFrom:
     - sourceName: chart-creds
