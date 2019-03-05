@@ -17,19 +17,20 @@ stages:
 - name: Publish Helm
   steps:
   - runScriptConfig:
-      image: 10.19.199.13:30003/library/rdcap-rancher-pipeline-publish-chart:latest
-      shellScript: |-
-       echo $HELM_REPO_CA_CRT >> ca.crt 
-       export HELM_REPO_CA_FILE=ca.crt
-       chown 10000 ca.crt
-       ls -all
-       publish-chart.sh 
-       ls -all
+      image: jgreat/rancher-pipeline-publish-chart:0.0.2
+      shellScript: publish-chart.sh 
+      #shellScript: |-
+       #echo $HELM_REPO_CA_CRT >> ca.crt 
+       #export HELM_REPO_CA_FILE=ca.crt
+       #chown 10000 ca.crt
+       #ls -all
+       #publish-chart.sh 
+       #ls -all
     env:
       CHART_NAME: rdcap-atlassian-jira
       CHART_VERSION: v0.0.1
-     # HELM_REPO_INSECURE: "true"
-      HELM_REPO_URL: https://10.19.199.13:30003/chartrepo/rdcap-dev/ 
+      HELM_REPO_INSECURE: "true"
+      HELM_REPO_URL: http://harbor-harbor-chartmuseum 
     envFrom:
     - sourceName: chart-creds
       sourceKey: BASIC_AUTH_PASS
