@@ -11,7 +11,7 @@ stages:
       buildContext: .
       tag: rdcap-dev/rdcap-jira:${CICD_EXECUTION_SEQUENCE}
       pushRemote: true
-      registry: 10.19.199.13:30003
+      registry: harbor-harbor-registry.harbor.svc.cluster.local:5000
     env:
       PLUGIN_INSECURE: "true"
 - name: Publish Helm
@@ -23,7 +23,7 @@ stages:
       CHART_NAME: rdcap-atlassian-jira
       CHART_VERSION: v0.0.1
       HELM_REPO_INSECURE: "true"
-      HELM_REPO_URL: http://harbor-harbor-chartmuseum 
+      HELM_REPO_URL: http://harbor-harbor-chartmuseum.harbor.svc.cluster.local
     envFrom:
     - sourceName: chart-creds
       sourceKey: BASIC_AUTH_PASS
