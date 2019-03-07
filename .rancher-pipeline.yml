@@ -4,35 +4,35 @@ stages:
   - runScriptConfig:
       image: java:8
       shellScript: export 
-- name: Publish Image
-  steps:
-  - publishImageConfig:
-      dockerfilePath: ./Dockerfile
-      buildContext: .
-      tag: rdcap-dev/rdcap-jira:${CICD_EXECUTION_SEQUENCE}
-      pushRemote: true
-      registry: 10.19.199.13:30003
-    env:
-      PLUGIN_INSECURE: "true"
-- name: Publish Helm
-  steps:
-  - runScriptConfig:
-      image: jgreat/rancher-pipeline-publish-chart:0.0.2
-      shellScript: publish-chart.sh 
-    env:
-      CHART_NAME: rdcap-atlassian-jira
-      CHART_VERSION: v0.0.1
-      HELM_REPO_INSECURE: "true"
-      HELM_REPO_URL: http://harbor-harbor-chartmuseum 
-    envFrom:
-    - sourceName: chart-creds
-      sourceKey: BASIC_AUTH_PASS
-      targetKey: HELM_REPO_PASSWORD
-    - sourceName: chart-creds
-      sourceKey: BASIC_AUTH_USER
-      targetKey: HELM_REPO_USERNAME
-    - sourceName: chart-creds
-      sourceKey: HELM_REPO_CA_CRT
-      targetKey: HELM_REPO_CA_CRT
+# - name: Publish Image
+#   steps:
+#   - publishImageConfig:
+#       dockerfilePath: ./Dockerfile
+#       buildContext: .
+#       tag: rdcap-dev/rdcap-jira:${CICD_EXECUTION_SEQUENCE}
+#       pushRemote: true
+#       registry: 10.19.199.13:30003
+#     env:
+#       PLUGIN_INSECURE: "true"
+# - name: Publish Helm
+#   steps:
+#   - runScriptConfig:
+#       image: jgreat/rancher-pipeline-publish-chart:0.0.2
+#       shellScript: publish-chart.sh 
+#     env:
+#       CHART_NAME: rdcap-atlassian-jira
+#       CHART_VERSION: v0.0.1
+#       HELM_REPO_INSECURE: "true"
+#       HELM_REPO_URL: http://harbor-harbor-chartmuseum 
+#     envFrom:
+#     - sourceName: chart-creds
+#       sourceKey: BASIC_AUTH_PASS
+#       targetKey: HELM_REPO_PASSWORD
+#     - sourceName: chart-creds
+#       sourceKey: BASIC_AUTH_USER
+#       targetKey: HELM_REPO_USERNAME
+#     - sourceName: chart-creds
+#       sourceKey: HELM_REPO_CA_CRT
+#       targetKey: HELM_REPO_CA_CRT
 timeout: 60
 notification: {}
