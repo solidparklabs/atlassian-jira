@@ -31,8 +31,5 @@ stages:
     - sourceName: chart-creds
       sourceKey: BASIC_AUTH_USER
       targetKey: HELM_REPO_USERNAME
-    - sourceName: chart-creds
-      sourceKey: HELM_REPO_CA_CRT
-      targetKey: HELM_REPO_CA_CRT
 timeout: 60
 notification: {}
