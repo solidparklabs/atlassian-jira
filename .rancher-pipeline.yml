@@ -18,16 +18,7 @@ stages:
   steps:
   - runScriptConfig:
       image: jgreat/rancher-pipeline-publish-chart:0.0.2
-      shellScript: |-
-       curl http://harbor-harbor-chartmuseum/index.yaml
-       publish-chart.sh 
-      #shellScript: 
-       #echo $HELM_REPO_CA_CRT >> ca.crt 
-       #export HELM_REPO_CA_FILE=ca.crt
-       #chown 10000 ca.crt
-       #ls -all
-       #publish-chart.sh 
-       #ls -all
+      shellScript: publish-chart.sh 
     env:
       CHART_NAME: rdcap-atlassian-jira
       CHART_VERSION: v0.0.1
