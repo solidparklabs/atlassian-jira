@@ -29,7 +29,7 @@ stages:
     env:
       CHART_NAME: rdcap-atlassian-jira
       CHART_VERSION: v0.0.1
-      HELM_REPO_INSECURE: "true"
+      #HELM_REPO_INSECURE: "true"
       HELM_REPO_URL: http://harbor-harbor-chartmuseum.harbor.svc.cluster.local/rdcap-dev
       PLUGIN_DEBUG: "true"
     envFrom:
@@ -39,10 +39,5 @@ stages:
     - sourceName: chart-creds
       sourceKey: BASIC_AUTH_USER
       targetKey: HELM_REPO_USERNAME
-  - applyAppConfig:
-      catalogTemplate: cattle-global-data:helm-incubator-chartmuseum
-      version: 1.1.1
-      name: jira
-      targetNamespace: debug
 timeout: 60
 notification: {}
