@@ -31,7 +31,7 @@ stages:
       CHART_NAME: rdcap-atlassian-jira
       CHART_VERSION: v0.0.1
       HELM_REPO_INSECURE: "true"
-      HELM_REPO_URL: http://harbor-harbor-chartmuseum.harbor.svc.cluster.local
+      HELM_REPO_URL: http://harbor-harbor-chartmuseum.harbor.svc.cluster.local/rdcap-dev
     envFrom:
     - sourceName: chart-creds
       sourceKey: BASIC_AUTH_PASS
