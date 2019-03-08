@@ -32,6 +32,7 @@ stages:
       CHART_VERSION: v0.0.1
       HELM_REPO_INSECURE: "true"
       HELM_REPO_URL: http://harbor-harbor-chartmuseum.harbor.svc.cluster.local/rdcap-dev
+      PLUGIN_DEBUG: "true"
     envFrom:
     - sourceName: chart-creds
       sourceKey: BASIC_AUTH_PASS
