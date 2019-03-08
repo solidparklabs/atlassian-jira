@@ -3,7 +3,7 @@ stages:
   steps:
   - runScriptConfig:
       image: java:8
-      shellScript: export 
+      shellScript: export
 - name: Publish Image
   steps:
   - publishImageConfig:
@@ -13,7 +13,6 @@ stages:
       pushRemote: true
       registry: harbor-harbor-registry.harbor.svc.cluster.local:5000
     env:
-     #PLUGIN_DEBUG: "true"
       PLUGIN_INSECURE: "true"
     envFrom:
     - sourceName: chart-creds
@@ -26,7 +25,7 @@ stages:
   steps:
   - runScriptConfig:
       image: jgreat/rancher-pipeline-publish-chart:0.0.2
-      shellScript: publish-chart.sh 
+      shellScript: publish-chart.sh
     env:
       CHART_NAME: rdcap-atlassian-jira
       CHART_VERSION: v0.0.1
@@ -40,5 +39,10 @@ stages:
     - sourceName: chart-creds
       sourceKey: BASIC_AUTH_USER
       targetKey: HELM_REPO_USERNAME
+  - applyAppConfig:
+      catalogTemplate: cattle-global-data:helm-incubator-chartmuseum
+      version: 1.1.1
+      name: jira
+      targetNamespace: debug
 timeout: 60
 notification: {}
