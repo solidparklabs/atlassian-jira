@@ -14,7 +14,14 @@ stages:
       registry: harbor-harbor-registry.harbor.svc.cluster.local:5000
     env:
       PLUGIN_DEBUG: "true"
-     # PLUGIN_INSECURE: "true"
+      PLUGIN_INSECURE: "true"
+    envFrom:
+    - sourceName: chart-creds
+      sourceKey: BASIC_AUTH_PASS
+      targetKey: PASSWORD
+    - sourceName: chart-creds
+      sourceKey: BASIC_AUTH_USER
+      targetKey: USERNAME
 - name: Publish Helm
   steps:
   - runScriptConfig:
