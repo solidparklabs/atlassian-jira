@@ -13,6 +13,7 @@ stages:
       pushRemote: true
       registry: harbor-harbor-registry.harbor.svc.cluster.local:5000
     env:
+      PLUGIN_DEBUG: "true"
       PLUGIN_INSECURE: "true"
 - name: Publish Helm
   steps:
