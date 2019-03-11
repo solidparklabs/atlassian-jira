@@ -31,7 +31,7 @@ stages:
       CHART_NAME: rdcap-atlassian-jira
       CHART_VERSION: v0.0.1
       HELM_REPO_INSECURE: "true"
-      HELM_REPO_URL: https://rdcap.connect365.net/chartrepo/rdcap-dev/
+      HELM_REPO_URL: http://babardcap.connect365.net/chartrepo/rdcap-dev/
       PLUGIN_DEBUG: "true"
     envFrom:
     - sourceName: chart-creds
