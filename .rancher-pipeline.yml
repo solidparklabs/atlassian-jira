@@ -13,8 +13,8 @@ stages:
       pushRemote: true
       registry: rdcap.connect365.net
       #registry: harbor-harbor-registry.harbor.svc.cluster.local:5000
-    env:
-      PLUGIN_INSECURE: "true"
+    #env:
+      #PLUGIN_INSECURE: "true"
     envFrom:
     - sourceName: chart-creds
       sourceKey: BASIC_AUTH_PASS
