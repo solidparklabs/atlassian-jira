@@ -12,8 +12,8 @@ stages:
       tag: rdcap-dev/rdcap-jira:${CICD_EXECUTION_SEQUENCE}
       pushRemote: true
       registry: harbor-harbor-registry.harbor.svc.cluster.local:5000
-    #env:
-      #PLUGIN_INSECURE: "true"
+    env:
+      PLUGIN_INSECURE: "true"
     envFrom:
     - sourceName: chart-creds
       sourceKey: BASIC_AUTH_PASS
