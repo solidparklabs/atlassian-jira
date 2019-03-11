@@ -29,8 +29,8 @@ stages:
     env:
       CHART_NAME: rdcap-atlassian-jira
       CHART_VERSION: v0.0.1
-      #HELM_REPO_INSECURE: "true"
-      HELM_REPO_URL: http://harbor-harbor-chartmuseum.harbor.svc.cluster.local/rdcap-dev
+      HELM_REPO_INSECURE: "true"
+      HELM_REPO_URL: https://10.19.199.14:30003/chartrepo/rdcap-dev/
       PLUGIN_DEBUG: "true"
     envFrom:
     - sourceName: chart-creds
