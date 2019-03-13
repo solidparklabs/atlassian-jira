@@ -1,9 +1,4 @@
 stages:
-- name: Compile
-  steps:
-  - runScriptConfig:
-      image: java:8
-      shellScript: export
 - name: Publish Image
   steps:
   - publishImageConfig:
