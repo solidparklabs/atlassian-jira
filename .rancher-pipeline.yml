@@ -9,7 +9,7 @@ stages:
   - publishImageConfig:
       dockerfilePath: ./Dockerfile
       buildContext: .
-      tag: rdcap-dev/rdcap-jira:${CICD_EXECUTION_SEQUENCE}
+      tag: rdcap-dev/rdcap-jira:use-tags-file
       pushRemote: true
       registry: harbor-harbor-registry.harbor.svc.cluster.local:5000
     env:
