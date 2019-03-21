@@ -24,7 +24,7 @@ stages:
       shellScript: publish-chart.sh
     env:
       CHART_NAME: rdcap-atlassian-jira
-      CHART_VERSION: v0.0.2
+      CHART_VERSION: v0.0.3
       HELM_REPO_URL: http://harbor-harbor-core.harbor/chartrepo/rdcap-dev/
       PLUGIN_DEBUG: "true"
     envFrom:
