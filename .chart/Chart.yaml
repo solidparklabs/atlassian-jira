@@ -1,6 +1,6 @@
 apiVersion: v1
 version: %VERSION%
-appVersion: %VERSION%
+appVersion: 7.13.1
 description: Project Management Tool for Agile Teams.
 name: %CHART_NAME%
 keywords:
