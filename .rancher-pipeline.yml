@@ -3,7 +3,7 @@ stages:
   steps:
   - runScriptConfig:
       image: jgreat/drone-build-tag:0.1.0
-      shellScript: build-tags.sh --include-feature-tag
+      #shellScript: build-tags.sh --include-feature-tag
     env:
       APPLICATION_VERSION: 1.1.${CICD_EXECUTION_SEQUENCE} 
 - name: Publish Image
