@@ -6,15 +6,11 @@ stages:
       shellScript: build-tags.sh --include-feature-tag
 - name: Publish Image
   steps:
-  - runScriptConfig:
-      image: busybox
-      shellScript: echo ${BUILD_APPLICATION_VERSION}
-    env:
-      BUILD_APPLICATION_VERSION: 1.1.${CICD_EXECUTION_SEQUENCE} 
   - publishImageConfig:
-      dockerfilePath: ./Dockerfile --build-arg 1.1.${CICD_EXECUTION_SEQUENCE}
+      dockerfilePath: ./Dockerfile 
       buildContext: .
-      tag: rdcap-dev/rdcap-jira:use-tags-file
+      tag: rdcap-dev/rdcap-jira:1.1.${CICD_EXECUTION_SEQUENCE} 
+#      tag: rdcap-dev/rdcap-jira:use-tags-file
       pushRemote: true
       registry: harbor-harbor-registry.harbor.svc.cluster.local:5000
     env:
