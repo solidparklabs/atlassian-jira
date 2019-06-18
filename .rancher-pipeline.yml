@@ -6,6 +6,9 @@ stages:
       shellScript: build-tags.sh --include-feature-tag
 - name: Publish Image
   steps:
+  - runScriptConfig:
+      image: busybox
+      shellScript: echo ${BUILD_APPLICATION_VERSION}
   - publishImageConfig:
       dockerfilePath: ./Dockerfile
       buildContext: .
