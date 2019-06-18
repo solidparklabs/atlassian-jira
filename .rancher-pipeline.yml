@@ -4,6 +4,8 @@ stages:
   - runScriptConfig:
       image: jgreat/drone-build-tag:0.1.0
       shellScript: build-tags.sh --include-feature-tag
+    env:
+      APPLICATION_VERSION: 1.1.${CICD_EXECUTION_SEQUENCE} 
 - name: Publish Image
   steps:
   - publishImageConfig:
@@ -14,7 +16,6 @@ stages:
       pushRemote: true
       registry: harbor-harbor-registry.harbor.svc.cluster.local:5000
     env:
-      BUILD_APPLICATION_VERSION: 1.1.${CICD_EXECUTION_SEQUENCE} 
       PLUGIN_INSECURE: "true"
       PLUGIN_DEBUG: "true"
     envFrom:
