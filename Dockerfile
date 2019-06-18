@@ -4,7 +4,7 @@ FROM openjdk:8-alpine
 ENV JIRA_HOME     /var/atlassian/jira
 ENV JIRA_INSTALL  /opt/atlassian/jira
 ENV JIRA_VERSION  7.13.1
-ENV APPLICATION_VERSION 1.1.${CICD_EXECUTION_SEQUENCE} 
+ENV APPLICATION_VERSION ${BUILD_APPLICATION_VERSION} 
 # 1.0.1
 
 # Install Atlassian JIRA and helper tools and setup initial home
