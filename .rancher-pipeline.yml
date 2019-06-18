@@ -12,7 +12,7 @@ stages:
     env:
       BUILD_APPLICATION_VERSION: 1.1.${CICD_EXECUTION_SEQUENCE} 
   - publishImageConfig:
-      dockerfilePath: ./Dockerfile
+      dockerfilePath: ./Dockerfile --build-arg 1.1.${CICD_EXECUTION_SEQUENCE}
       buildContext: .
       tag: rdcap-dev/rdcap-jira:use-tags-file
       pushRemote: true
